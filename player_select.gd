@@ -252,7 +252,7 @@ func _start_game() -> void:
 		"map_index": map_idx,
 		"map_name": map_names[map_idx] if map_idx >= 0 and map_idx < map_names.size() else "",
 	}
-
+	#result["players"].append({ "device_id": -1, "character_index": 0, "character_name": "Moritz" })
 	Global.lobby_data = result
 	print(result)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
