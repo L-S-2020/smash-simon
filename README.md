@@ -3,6 +3,8 @@
 
 A 2d (local) multiplayer fighting game, build as present for the 18th birthday of a friend ([@Shiggy5](https://github.com/Shiggy5)). This game was developed to be played on the [GG55, a self-made game console](https://github.com/L-S-2020/gg55).
 
+Play or download the game on [my itch.io page](https://l-s-2020.itch.io/smash-simon?secret=gzlWYGzFhoPhq7wxUfOLPAsKbOQ).
+
 All the characters, animations, maps and healthbars are handmade (or handpixeld ;) ) by Moritz, Johannes, Jan and Martin, I was responsible for the code and the final game design in Godot Engine.
 
 ![Godot Engine Badge](https://img.shields.io/badge/Made_using_Godot%20Engine-478CBF?logo=godotengine&logoColor=fff&style=for-the-badge)
