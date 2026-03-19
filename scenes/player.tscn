@@ -1,0 +1,97 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbsfx61pin7f2"]
+
+[ext_resource type="Script" uid="uid://bntlciemuqkuk" path="res://player.gd" id="1_hqtel"]
+[ext_resource type="SpriteFrames" uid="uid://b57lee552qfa0" path="res://chars/anims/tres/moritz.tres" id="2_dqkch"]
+[ext_resource type="Script" uid="uid://dr8bvnfebp76" path="res://addons/health_hitbox_hurtbox/health/health.gd" id="3_sweqy"]
+[ext_resource type="Script" uid="uid://ctuf38y050aep" path="res://addons/health_hitbox_hurtbox/2d/hurt_box_2d/hurt_box_2d.gd" id="4_2hs0m"]
+[ext_resource type="AudioStream" uid="uid://bfnpowicyfyws" path="res://audio/jump.wav" id="5_qlg0r"]
+
+[sub_resource type="Animation" id="Animation_smehm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fjrip"]
+resource_name = "new_animation"
+length = 0.55
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.2351742e-08, 0.099999964, 0.19999999, 0.29999998, 0.39999998, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1, 2, 3, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ur7pv"]
+_data = {
+&"RESET": SubResource("Animation_smehm"),
+&"new_animation": SubResource("Animation_fjrip")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_hqtel")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+scale = Vector2(0.438, 0.438)
+sprite_frames = ExtResource("2_dqkch")
+animation = &"block"
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("3_sweqy")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://dr8bvnfebp76"
+
+[node name="HurtBox2D" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("4_2hs0m")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://ctuf38y050aep"
+
+[node name="schlagen_timeout" type="Timer" parent="."]
+one_shot = true
+
+[node name="HitBox_pos_right" type="Marker2D" parent="."]
+position = Vector2(54, 0)
+
+[node name="HitBox_pos_left" type="Marker2D" parent="."]
+position = Vector2(-58, 0)
+
+[node name="block_timeout" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ur7pv")
+}
+
+[node name="block_time" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qlg0r")
+
+[connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
+[connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="ready" from="Health" to="." method="_on_health_ready"]
+[connection signal="revived" from="Health" to="." method="_on_health_revived"]
+[connection signal="timeout" from="schlagen_timeout" to="." method="_on_schlagen_timeout_timeout"]
+[connection signal="timeout" from="block_timeout" to="." method="_on_block_timeout_timeout"]
+[connection signal="timeout" from="block_time" to="." method="_on_block_time_timeout"]

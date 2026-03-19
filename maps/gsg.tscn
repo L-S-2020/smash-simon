@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8xuauv1bxkbc"]
+
+[ext_resource type="Texture2D" uid="uid://d36nfxglbsx43" path="res://maps/bg/classroom.png" id="1_a115p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a115p"]
+size = Vector2(1408, 1.4549007)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tf7j"]
+size = Vector2(92, 1040)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nj30b"]
+size = Vector2(1408, 1.4549007)
+
+[node name="Gsg" type="Node2D"]
+
+[node name="Classroom" type="Sprite2D" parent="."]
+position = Vector2(608, 267)
+scale = Vector2(0.61, 0.61)
+texture = ExtResource("1_a115p")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 3.0517578e-05)
+scale = Vector2(1, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(516.99994, 706.00006)
+scale = Vector2(2.122, 132.171)
+shape = SubResource("RectangleShape2D_a115p")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(0, 3.0517578e-05)
+scale = Vector2(1, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-231, 251.99998)
+shape = SubResource("RectangleShape2D_3tf7j")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(0, 3.0517578e-05)
+scale = Vector2(1, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(1446, 235.99998)
+shape = SubResource("RectangleShape2D_3tf7j")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(0, 3.0517578e-05)
+scale = Vector2(1, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(573, -260.00003)
+scale = Vector2(2.046875, 127.5)
+shape = SubResource("RectangleShape2D_nj30b")
